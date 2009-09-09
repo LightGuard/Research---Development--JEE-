@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns="http://jboss.com/products/seam/components"
+            xmlns:core="http://jboss.com/products/seam/core"
+            xmlns:persistence="http://jboss.com/products/seam/persistence"
+            xmlns:drools="http://jboss.com/products/seam/drools"
+            xmlns:bpm="http://jboss.com/products/seam/bpm"
+            xmlns:security="http://jboss.com/products/seam/security"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:tx="http://jboss.com/products/seam/transaction"
+            xsi:schemaLocation=
+                "http://jboss.com/products/seam/core http://jboss.com/products/seam/core-2.1.xsd
+                 http://jboss.com/products/seam/persistence http://jboss.com/products/seam/persistence-2.1.xsd
+                 http://jboss.com/products/seam/drools http://jboss.com/products/seam/drools-2.1.xsd
+                 http://jboss.com/products/seam/bpm http://jboss.com/products/seam/bpm-2.1.xsd
+                 http://jboss.com/products/seam/security http://jboss.com/products/seam/security-2.1.xsd
+                 http://jboss.com/products/seam/transaction http://jboss.com/products/seam/transaction-2.1.xsd
+                 http://jboss.com/products/seam/components http://jboss.com/products/seam/components-2.1.xsd">
+
+    <core:init debug="true"/>
+
+    <component scope="APPLICATION" auto-create="true" name="renderManager" class="com.icesoft.faces.async.render.RenderManager" />
+
+    <core:manager concurrent-request-timeout="500"
+                  conversation-timeout="120000"
+                  conversation-id-parameter="cid"
+                  parent-conversation-id-parameter="pid" default-flush-mode="MANUAL" />
+
+    <persistence:entity-manager-factory name="entityManagerFactory" persistence-unit-name="icefaces-proofs" />
+    <persistence:managed-persistence-context name="entityManager" entity-manager-factory="#{entityManagerFactory}"
+                                             auto-create="true" />
+
+    <tx:entity-transaction entity-manager="#{entityManager}" />
+
+</components>

@@ -1,0 +1,58 @@
+usePlugin 'war'
+usePlugin 'jetty'
+
+configurations { 
+    runtime.exclude group: 'javax.el'
+    runtime.exclude group: 'javax.servlet'
+    runtime.exclude group: 'avalon-framework'
+    runtime.exclude group: 'logkit'
+    runtime.exclude group: 'xml-apis'
+    runtime.exclude group: 'javax.xml.stream' 
+
+    hibernateValidator3
+}
+
+repositories {
+    mavenCentral()
+    mavenRepo urls: 'http://repository.jboss.org/maven2'
+}
+
+dependencies {
+    seamVersion = '2.2.0.GA'
+    hibernateVersion = '3.5.0.Beta-1'
+
+    compile group: 'javax.faces', name: 'jsf-api', version: '1.2_13'
+    compile group: 'org.jboss.seam', name: 'jboss-seam', version: seamVersion
+    compile group: 'org.hibernate', name: 'hibernate-envers', version: hibernateVersion
+    compile group: 'org.hibernate', name: 'hibernate-annotations', version: hibernateVersion
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.0.0.CR1'
+    compile group: 'org.icefaces', name:'icefaces-comps', version:'1.8.1'
+    compile group: 'org.icefaces', name:'icefaces', version:'1.8.1'
+
+    // Needed only for compile, probably have to exclude these in runtime
+    compile group: 'javax.validation', name: 'validation-api', version: '1.0.CR5' 
+    compile group: 'org.hibernate.java-persistence', name: 'jpa-api', version: '2.0.Beta-20090815' 
+
+    runtime group: 'javax.faces', name: 'jsf-impl', version: '1.2_13'
+    runtime group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
+    runtime group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion 
+    runtime group: 'org.icefaces', name:'icefaces-facelets', version:'1.8.1'
+    runtime group: 'org.jboss.seam', name: 'jboss-seam-ui', version: seamVersion
+    runtime group: 'org.slf4j', name:'slf4j-log4j12', version: '1.5.6' 
+    runtime group: 'com.h2database', name:'h2', version: '1.1.118' 
+
+    // Per Emmanuel Bernard
+    hibernateValidator3('org.hibernate:hibernate-validator:3.1.0.GA') {
+      transitive = false
+    }
+}
+
+war {
+  libConfigurations('hibernateValidator3')
+}
+
+// Convention properties for Jetty
+stopKey = 'foo'
+stopPort = 9451
+httpPort = 8163
+

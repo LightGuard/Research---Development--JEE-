@@ -1,0 +1,23 @@
+PRE-REQS
+================================================================================
+1. Gradle
+  Go to http://www.gradle.org and download gradle-0.7-all.zip.  Unzip gradle
+  wherever you like, but make sure it's on your PATH.  You may need to 
+  restart Terminal or simply source (that's the command) your .bashrc /
+  .profile / whatever file so it shows up on the path.  You can verify this
+  by executing printenv | grep PATH and looking to see if GRADLE_HOME/bin
+  is correctly on your PATH.
+
+BUILDING
+================================================================================
+Usage of gradle is very similar to ant.  Simple cd to the project directory and
+execute gradle compile.
+
+NOTE: You can see the list of tasks available via gradle -t
+
+RUNNING
+================================================================================
+This project can be run from the command line using jetty by using the 
+jettyRun and jettyRunWar (more information is available at
+http://www.gradle.org/0.7/docs/userguide/jetty_plugin.html).
+

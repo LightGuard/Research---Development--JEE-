@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+<head>
+    <ice:outputDeclaration doctypeRoot="HTML"
+                           doctypePublic="-//W3C//DTD XHTML 1.0 Transitional//EN"
+                           doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Research and Development</title>
+    <link rel='stylesheet' type='text/css' href='./xmlhttp/css/rime/rime.css' />
+    <ui:insert name="head" />
+</head>
+<body>
+
+<ice:form>
+    <ui:include src="menu.xhtml" />
+</ice:form>
+
+<ice:outputConnectionStatus activeLabel="requesting..." styleClass="connectionStatus" />
+
+<div class="body">
+    <ice:form id="mainForm">
+        <ice:messages id="messages" />
+        <ui:insert name="body" />
+    </ice:form>
+</div>
+</body>
+</html>
