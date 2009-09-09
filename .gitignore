@@ -1,0 +1,4 @@
+.* # Ignore all dot files
+!.gitignore # expect for .gitignore
+*.class # Ignore all class files
+build # Ignore the build directory
