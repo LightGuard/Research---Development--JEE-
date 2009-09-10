@@ -1,5 +1,6 @@
 usePlugin 'war'
 usePlugin 'jetty'
+usePlugin 'eclipse'
 
 configurations { 
     runtime.exclude group: 'javax.el'
