@@ -28,8 +28,10 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-envers', version: hibernateVersion
     compile group: 'org.hibernate', name: 'hibernate-annotations', version: hibernateVersion
     compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.0.0.CR1'
+    compile group: 'org.hornetq', name: 'hornetq-jms', version: hornetQVersion
     compile group: 'org.icefaces', name:'icefaces-comps', version:'1.8.1'
     compile group: 'org.icefaces', name:'icefaces', version:'1.8.1'
+    compile group: 'org.jboss.javaee', name: 'jboss-jms-api', version: '1.1.0.GA'
 
     // Needed only for compile, probably have to exclude these in runtime
     compile group: 'javax.validation', name: 'validation-api', version: '1.0.CR5' 
@@ -39,13 +41,11 @@ dependencies {
     runtime group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
     runtime group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion 
     runtime group: 'org.hornetq', name: 'hornetq-core', version: hornetQVersion
-    runtime group: 'org.hornetq', name: 'hornetq-jms', version: hornetQVersion
     runtime group: 'org.hornetq', name: 'hornetq-logging', version: hornetQVersion
     runtime group: 'org.hornetq', name: 'hornetq-transports', version: hornetQVersion
     runtime group: 'org.icefaces', name:'icefaces-facelets', version:'1.8.1'
     runtime group: 'org.jboss.seam', name: 'jboss-seam-ui', version: seamVersion
-    runtime group: 'org.jboss.javaee', name: 'jboss-jms-api', version: '1.1.0.GA'
-    runtime group: 'org.slf4j', name:'slf4j-log4j12', version: '1.5.6' 
+    runtime group: 'org.slf4j', name:'slf4j-log4j12', version: '1.5.6'
     runtime group: 'com.h2database', name:'h2', version: '1.1.118' 
 
     // Per Emmanuel Bernard

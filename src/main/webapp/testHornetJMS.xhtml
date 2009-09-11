@@ -1,0 +1,19 @@
+<ui:composition
+    template="template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body">
+        <ice:commandButton id="sendMsgBtn" action="#{hornetSendReceive.sendMessage}" value="Send Message"/>
+        <ice:commandButton id="receiveMsgBtn" action="#{hornetSendReceive.receiveMessage}" value="Receive Message"/>
+        <br/><br/>
+        Message sent: <ice:outputText value="#{hornetSendReceive.messageSent}" />
+        <br/>
+        Message received: <ice:outputText value="#{hornetSendReceive.messageReceived}" />
+    </ui:define>
+
+</ui:composition>

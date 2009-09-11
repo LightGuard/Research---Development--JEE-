@@ -43,10 +43,13 @@
     <!-- Limit categories -->
     <!-- ================ -->
 
-    <!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
-    <category name="org.apache">
-        <priority value="INFO" />
-    </category> 
+    <category name="org.mortbay">
+        <priority value="DEBUG" />
+    </category>
+
+    <category name="org.hornetq">
+        <priority value="DEBUG" />
+    </category>
 
     <category name="org.jboss.seam">
         <priority value="DEBUG" />
