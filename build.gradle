@@ -21,6 +21,7 @@ repositories {
 dependencies {
     seamVersion = '2.2.0.GA'
     hibernateVersion = '3.5.0.Beta-1'
+    hornetQVersion = '2.0.0.BETA5'
 
     compile group: 'javax.faces', name: 'jsf-api', version: '1.2_13'
     compile group: 'org.jboss.seam', name: 'jboss-seam', version: seamVersion
@@ -37,8 +38,13 @@ dependencies {
     runtime group: 'javax.faces', name: 'jsf-impl', version: '1.2_13'
     runtime group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
     runtime group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion 
+    runtime group: 'org.hornetq', name: 'hornetq-core', version: hornetQVersion
+    runtime group: 'org.hornetq', name: 'hornetq-jms', version: hornetQVersion
+    runtime group: 'org.hornetq', name: 'hornetq-logging', version: hornetQVersion
+    runtime group: 'org.hornetq', name: 'hornetq-transports', version: hornetQVersion
     runtime group: 'org.icefaces', name:'icefaces-facelets', version:'1.8.1'
     runtime group: 'org.jboss.seam', name: 'jboss-seam-ui', version: seamVersion
+    runtime group: 'org.jboss.javaee', name: 'jboss-jms-api', version: '1.1.0.GA'
     runtime group: 'org.slf4j', name:'slf4j-log4j12', version: '1.5.6' 
     runtime group: 'com.h2database', name:'h2', version: '1.1.118' 
 
