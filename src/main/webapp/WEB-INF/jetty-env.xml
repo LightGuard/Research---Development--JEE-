@@ -10,48 +10,19 @@
         <Arg>
           <Call class="org.hornetq.core.server.HornetQ" name="newHornetQServer">
             <Arg>
-              <New class="org.hornetq.core.config.impl.ConfigurationImpl">
-                <Set name="persistenceEnabled">false</Set>
-                <Set name="securityEnabled">false</Set>
-                <Get name="AcceptorConfigurations">
-                  <Call name="add">
-                    <Arg>
-                      <New class="org.hornetq.core.config.TransportConfiguration">
-                        <Arg>org.hornetq.core.remoting.impl.invm.InVMAcceptorFactory</Arg>
-                      </New>
-                    </Arg>
-                  </Call>
-                </Get>
+              <New class="org.hornetq.core.config.impl.FileConfiguration">
+                <Set name="configurationUrl">hornetq-configuration.xml</Set>
+                <Call name="start" />
               </New>
             </Arg>
           </Call>
         </Arg>
+        <Arg>hornetq-jms.xml</Arg>
         <Call name="start" />
-        <Call name="createConnectionFactory">
-          <Arg>HornetQConnectionFactory</Arg>
-          <Arg>
-            <New class="org.hornetq.core.config.TransportConfiguration">
-              <Arg>org.hornetq.core.remoting.impl.invm.InVMConnectorFactory</Arg>
-            </New>
-          </Arg>
-          <Arg>
-            <New class="java.util.ArrayList">
-              <Call name="add">
-                <Arg>java:comp/env/jms/connectionFactory</Arg>
-              </Call>
-            </New>
-          </Arg>
-        </Call>
         <Set name="context">
           <New class="javax.naming.InitialContext">
           </New>
         </Set>
-        <Call name="createQueue">
-          <Arg>testQueue</Arg>
-          <Arg>java:comp/env/jms/queues/testQueue</Arg>
-          <Arg></Arg>
-          <Arg type="boolean">false</Arg>
-        </Call>
       </New>
     </Arg>
   </New>

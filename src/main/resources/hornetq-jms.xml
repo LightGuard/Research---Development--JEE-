@@ -1,0 +1,31 @@
+<configuration xmlns="urn:hornetq"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="urn:hornetq /schema/hornetq-jms.xsd">
+
+  <connection-factory name="ConnectionFactory">
+    <connector-ref connector-name="inVM" />
+    <entries>
+      <entry name="ConnectionFactory" />
+      <entry name="XAConnectionFactory" />
+      <entry name="java:comp/env/jms/connectionFactory" />
+      <entry name="java:comp/env/jms/XAConnectionFactory" />
+    </entries>
+  </connection-factory>
+
+  <queue name="DLQ">
+    <entry name="java:comp/env/jms/queues/DLQ" />
+  </queue>
+  <queue name="ExpiryQueue">
+    <entry name="java:comp/env/jms/queues/ExpiryQueue" />
+  </queue>
+  <queue name="ExampleQueue">
+    <entry name="java:comp/env/jms/queues/ExampleQueue" />
+  </queue>
+  <queue name="TestQueue">
+    <entry name="java:comp/env/jms/queues/testQueue" />
+  </queue>
+  <topic name="ExampleTopic">
+    <entry name="java:comp/env/jms/topics/ExampleTopic" />
+  </topic>
+
+</configuration>
