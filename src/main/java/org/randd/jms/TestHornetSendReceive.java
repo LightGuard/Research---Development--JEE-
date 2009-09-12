@@ -32,7 +32,6 @@ public class TestHornetSendReceive
    private String messageSentText;
    private boolean messageReceived;
    private String messageReceivedText;
-   private Session s;
 
    @Logger
    private Log log;
@@ -48,7 +47,6 @@ public class TestHornetSendReceive
            this.testQueue = (Queue) ic.lookup("java:comp/env/jms/queues/testQueue");
 
            this.conn = this.cf.createConnection();
-           this.s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
            this.conn.start();
        }
        catch (Exception e)
@@ -72,12 +70,14 @@ public class TestHornetSendReceive
    {
        try
        {
+           Session s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
            MessageProducer mp = s.createProducer(this.testQueue);
 
-           TextMessage txtMsg = this.s.createTextMessage("Hello from Hornet at: " + new Date());
+           TextMessage txtMsg = s.createTextMessage("Hello from Hornet at: " + new Date());
            mp.send(txtMsg);
            this.messageSent = true;
            this.messageSentText = txtMsg.getText();
+           s.close();
        }
        catch (JMSException e)
        {
@@ -90,11 +90,13 @@ public class TestHornetSendReceive
    {
        try
        {
-           MessageConsumer mc = this.s.createConsumer(this.testQueue);
+           Session s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+           MessageConsumer mc = s.createConsumer(this.testQueue);
 
            TextMessage receivedMsg = (TextMessage) mc.receive(1000);
            this.messageReceivedText = receivedMsg.getText();
            this.messageReceived = true;
+           s.close();
        }
        catch (JMSException e)
        {
@@ -108,7 +110,6 @@ public class TestHornetSendReceive
    {
        try
        {
-           this.s.close();
            this.conn.stop();
        }
        catch (JMSException e)
