@@ -1,55 +1,57 @@
 <?xml version="1.0"?>
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
 
-<Configure id="wac" class="org.mortbay.jetty.webapp.WebAppContext"> 
-
-  <!-- This should setup the connection factory in JNDI -->
-  <New id="hornetqcf" class="org.mortbay.jetty.plus.naming.Resource">
+<Configure id="wac" class="org.mortbay.jetty.webapp.WebAppContext">
+  <New id="jmsServerManager" class="org.mortbay.jetty.plus.naming.Resource">
     <Arg><Ref id="wac"/></Arg>
-    <Arg>jms/connectionFactory</Arg>
+    <Arg>jms/serverManager</Arg>
     <Arg>
-      <New class="org.hornetq.jms.client.HornetQConnectionFactory">
+      <New class="org.hornetq.jms.server.impl.JMSServerManagerImpl">
         <Arg>
-          <New class="org.hornetq.core.config.TransportConfiguration">
-            <Arg>org.hornetq.core.remoting.impl.invm.InVMConnectorFactory</Arg>
-          </New>
-        </Arg>
-      </New> 
-    </Arg>
-  </New>
-
-  <!-- This is basically to start the server, really no point in having it in JNDI -->
-  <New id="hornetqserver" class="org.mortbay.jetty.plus.naming.Resource">
-    <Arg><Ref id="wac"/></Arg>
-    <Arg>jms/server</Arg>
-    <Arg>
-      <Call class="org.hornetq.core.server.HornetQ" name="newHornetQServer">
-        <Arg>
-          <New class="org.hornetq.core.config.impl.ConfigurationImpl">
-            <Set name="persistenceEnabled">false</Set>
-            <Set name="securityEnabled">false</Set>
-            <Get name="AcceptorConfigurations">
-              <Call name="add">
-                <Arg>
-                  <New class="org.hornetq.core.config.TransportConfiguration">
-                    <Arg>org.hornetq.core.remoting.impl.invm.InVMAcceptorFactory</Arg>
-                  </New> 
-                </Arg>
-              </Call>
-            </Get>
-          </New>
+          <Call class="org.hornetq.core.server.HornetQ" name="newHornetQServer">
+            <Arg>
+              <New class="org.hornetq.core.config.impl.ConfigurationImpl">
+                <Set name="persistenceEnabled">false</Set>
+                <Set name="securityEnabled">false</Set>
+                <Get name="AcceptorConfigurations">
+                  <Call name="add">
+                    <Arg>
+                      <New class="org.hornetq.core.config.TransportConfiguration">
+                        <Arg>org.hornetq.core.remoting.impl.invm.InVMAcceptorFactory</Arg>
+                      </New>
+                    </Arg>
+                  </Call>
+                </Get>
+              </New>
+            </Arg>
+          </Call>
         </Arg>
         <Call name="start" />
-      </Call>
-    </Arg>
-  </New>
-
-  <New class="org.mortbay.jetty.plus.naming.Resource">
-    <Arg><Ref id="wac" /></Arg>
-    <Arg>jms/queues/testQueue</Arg>
-    <Arg>
-      <New class="org.hornetq.jms.HornetQQueue">
-        <Arg>testQueue</Arg>
+        <Call name="createConnectionFactory">
+          <Arg>HornetQConnectionFactory</Arg>
+          <Arg>
+            <New class="org.hornetq.core.config.TransportConfiguration">
+              <Arg>org.hornetq.core.remoting.impl.invm.InVMConnectorFactory</Arg>
+            </New>
+          </Arg>
+          <Arg>
+            <New class="java.util.ArrayList">
+              <Call name="add">
+                <Arg>java:comp/env/jms/connectionFactory</Arg>
+              </Call>
+            </New>
+          </Arg>
+        </Call>
+        <Set name="context">
+          <New class="javax.naming.InitialContext">
+          </New>
+        </Set>
+        <Call name="createQueue">
+          <Arg>testQueue</Arg>
+          <Arg>java:comp/env/jms/queues/testQueue</Arg>
+          <Arg></Arg>
+          <Arg type="boolean">false</Arg>
+        </Call>
       </New>
     </Arg>
   </New>

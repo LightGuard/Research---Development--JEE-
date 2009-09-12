@@ -21,3 +21,8 @@ This project can be run from the command line using jetty by using the
 jettyRun and jettyRunWar (more information is available at
 http://www.gradle.org/0.7/docs/userguide/jetty_plugin.html).
 
+GENERATING ECLIPSE PROJECT
+================================================================================
+Execute gradle eclipse and a new eclipseWTP project will be created with all of
+the needed libraries.
+

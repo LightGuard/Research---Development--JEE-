@@ -8,12 +8,15 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:define name="body">
+        Only click these buttons once please :) (At least until I figure out what's going on)
         <ice:commandButton id="sendMsgBtn" action="#{hornetSendReceive.sendMessage}" value="Send Message"/>
         <ice:commandButton id="receiveMsgBtn" action="#{hornetSendReceive.receiveMessage}" value="Receive Message"/>
         <br/><br/>
         Message sent: <ice:outputText value="#{hornetSendReceive.messageSent}" />
-        <br/>
+        <br/>Message sent text: <ice:outputText value="#{hornetSendReceive.messageSentText}" />
+        <br/><br/>
         Message received: <ice:outputText value="#{hornetSendReceive.messageReceived}" />
+        <br/>Message received text: <ice:outputText value="#{hornetSendReceive.messageReceivedText}" />
     </ui:define>
 
 </ui:composition>
