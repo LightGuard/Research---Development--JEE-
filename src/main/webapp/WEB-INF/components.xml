@@ -25,7 +25,7 @@
                   conversation-id-parameter="cid"
                   parent-conversation-id-parameter="pid" default-flush-mode="MANUAL" />
 
-    <persistence:entity-manager-factory name="entityManagerFactory" persistence-unit-name="icefaces-proofs" />
+    <persistence:entity-manager-factory name="entityManagerFactory" persistence-unit-name="r-and-d" />
     <persistence:managed-persistence-context name="entityManager" entity-manager-factory="#{entityManagerFactory}"
                                              auto-create="true" />
 

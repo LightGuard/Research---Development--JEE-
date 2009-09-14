@@ -31,6 +31,7 @@ dependencies {
     compile group: 'org.icefaces', name:'icefaces-comps', version:'1.8.1'
     compile group: 'org.icefaces', name:'icefaces', version:'1.8.1'
     compile group: 'org.jboss.javaee', name: 'jboss-jms-api', version: '1.1.0.GA'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.4'
 
     // Needed only for compile, probably have to exclude these in runtime
     compile group: 'javax.validation', name: 'validation-api', version: '1.0.CR5' 
