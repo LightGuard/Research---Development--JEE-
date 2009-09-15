@@ -2,9 +2,6 @@ package org.randd.entity.library;
 
 import org.hibernate.envers.Audited;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +18,6 @@ import java.util.Set;
 @Entity
 @Audited
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING, length = 20)
-@DiscriminatorValue("P")
 public class Person
 {
     @Id
