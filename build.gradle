@@ -2,6 +2,11 @@ usePlugin 'war'
 usePlugin 'jetty'
 usePlugin 'eclipse'
 
+defaultTasks 'jettyRunWar'
+project.group = 'org.randd'
+project.version = 0.1
+archivesBaseName = 'r_and_d'
+
 configurations { 
     runtime.exclude group: 'javax.el'
     runtime.exclude group: 'javax.servlet'
@@ -61,7 +66,8 @@ war {
 }
 
 // Convention properties for Jetty
-stopKey = 'foo'
-stopPort = 9451
-httpPort = 8163
+[jettyRunWar,jettyRun,jettyStop]*.stopKey = 'foo'
+[jettyRunWar,jettyRun,jettyStop]*.stopPort = 9451
+[jettyRunWar,jettyRun,jettyStop]*.httpPort = 8163
+[jettyRunWar,jettyRun,jettyStop]*.contextPath = 'r-and-d'
 

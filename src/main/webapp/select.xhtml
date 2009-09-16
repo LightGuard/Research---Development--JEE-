@@ -1,0 +1,33 @@
+<ui:composition
+    template="template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body">
+        This is pretty much just a demo of how to do a "Select All"
+        <br/>
+        Select all
+        <ice:selectBooleanCheckbox id="selectAll" value="#{selectionExample.allSelected}"
+                                   partialSubmit="true"
+                                   valueChangeListener="#{selectionExample.selectAll}" />
+        <ice:dataTable id="selectAllTable" value="#{people}" var="_person">
+            <ice:column>
+                <f:facet name="header">First Name</f:facet>
+                #{_person.person.firstName}
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{_person.person.lastName}
+            </ice:column>
+            <ice:column>
+                <f:facet name="header">Selected</f:facet>
+                <ice:selectBooleanCheckbox id="personSelected" partialSubmit="true" value="#{_person.selected}" />
+            </ice:column>
+        </ice:dataTable>
+    </ui:define>
+
+</ui:composition>

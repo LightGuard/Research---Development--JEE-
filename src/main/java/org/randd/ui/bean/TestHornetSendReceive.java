@@ -1,4 +1,4 @@
-package org.randd.jms;
+package org.randd.ui.bean;
 
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Create;

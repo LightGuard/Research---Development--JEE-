@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -34,6 +35,26 @@ public class Person
 
     @OneToMany(mappedBy = "personCheckingOut")
     private Set<Book> booksCheckedOut;
+
+    public Person()
+    {
+        this.booksCheckedOut = new HashSet<Book>();
+    }
+
+    public Person(String firstName, String lastName)
+    {
+        this();
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Person(Long id, Address address, String firstName, String lastName, Set<Book> booksCheckedOut)
+    {
+        this(firstName, lastName);
+        this.id = id;
+        this.address = address;
+        this.booksCheckedOut = booksCheckedOut;
+    }
 
     public Long getId()
     {
