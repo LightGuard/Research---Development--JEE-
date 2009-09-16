@@ -70,4 +70,5 @@ war {
 [jettyRunWar,jettyRun,jettyStop]*.stopPort = 9451
 [jettyRunWar,jettyRun,jettyStop]*.httpPort = 8163
 [jettyRunWar,jettyRun,jettyStop]*.contextPath = 'r-and-d'
+[jettyRunWar,jettyRun]*.daemon = true
 
