@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           targetNamespace="http://www.randd.org/components/jms"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:components="http://jboss.com/products/seam/components" attributeFormDefault="unqualified"
+           xmlns:jms="http://jboss.com/products/seam/jms" attributeFormDefault="unqualified"
+           xsi:schemaLocation="http://jboss.com/products/seam/components http://jboss.com/products/seam/components-2.2.xsd
+           http://jboss.com/products/seam/jms http://jboss.com/products/seam/jms-2.2.xsd">
+  <xs:import namespace="http://jboss.com/products/seam/components"
+             schemaLocation="http://jboss.com/products/seam/components-2.2.xsd" />
+  <xs:element name="async-message-listener-container">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="components:attlist.component" />
+      <xs:attributeGroup ref="attlist.AsyncMessageListenerContainer" />
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist.AsyncMessageListenerContainer">
+    <xs:attribute name="connection-factory-jndi-name" type="components:string" />
+    <xs:attribute name="connection-factory" type="components:componentName" />
+    <xs:attribute name="destination-jndi-name" type="components:string" />
+    <xs:attribute name="destination" type="components:componentName" />
+    <xs:attribute name="listener" type="components:componentName" use="required" />
+    <xs:attribute name="exception-listener" type="components:componentName" />
+    <xs:attribute name="outjected-session-name" type="components:string" />
+    <xs:attribute name="acknowledgeMode" type="components:int" />
+    <xs:attribute name="sessionTransacted" type="components:boolean" />
+    <xs:attribute name="subscriptionDurable" type="components:boolean" />
+    <xs:attribute name="durableSubscriptionName" type="components:string" />
+  </xs:attributeGroup>
+</xs:schema>
