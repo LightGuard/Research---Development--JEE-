@@ -9,11 +9,6 @@
 
     <ui:define name="body">
         This is pretty much just a demo of how to do a "Select All"
-        <br/>
-        Select all
-        <ice:selectBooleanCheckbox id="selectAll" value="#{selectionExample.allSelected}"
-                                   partialSubmit="true"
-                                   valueChangeListener="#{selectionExample.selectAll}" />
         <ice:dataTable id="selectAllTable" value="#{people}" var="_person">
             <ice:column>
                 <f:facet name="header">First Name</f:facet>
@@ -24,7 +19,13 @@
                 #{_person.person.lastName}
             </ice:column>
             <ice:column>
-                <f:facet name="header">Selected</f:facet>
+                <f:facet name="header">
+                    <ice:setEventPhase events="ValueChangeEvent" phase="INVOKE_APPLICATION">
+                        <ice:selectBooleanCheckbox id="selectAll" value="#{selectionExample.allSelected}"
+                                                   partialSubmit="true"
+                                                   valueChangeListener="#{selectionExample.selectAll}" />
+                    </ice:setEventPhase>
+                </f:facet>
                 <ice:selectBooleanCheckbox id="personSelected" partialSubmit="true" value="#{_person.selected}" />
             </ice:column>
         </ice:dataTable>

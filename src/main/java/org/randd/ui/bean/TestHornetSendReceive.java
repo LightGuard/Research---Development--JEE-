@@ -28,6 +28,9 @@ public class TestHornetSendReceive
    private Queue testQueue;
    private ConnectionFactory cf;
    private Connection conn;
+   private Session session;
+   private MessageProducer mp;
+   private MessageConsumer mc;
    private boolean messageSent;
    private String messageSentText;
    private boolean messageReceived;
@@ -47,6 +50,10 @@ public class TestHornetSendReceive
            this.testQueue = (Queue) ic.lookup("java:comp/env/jms/queues/testQueue");
 
            this.conn = this.cf.createConnection();
+
+           this.session = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+           this.mp = this.session.createProducer(this.testQueue);
+
            this.conn.start();
        }
        catch (Exception e)
@@ -70,14 +77,11 @@ public class TestHornetSendReceive
    {
        try
        {
-           Session s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-           MessageProducer mp = s.createProducer(this.testQueue);
 
-           TextMessage txtMsg = s.createTextMessage("Hello from Hornet at: " + new Date());
-           mp.send(txtMsg);
+           TextMessage txtMsg = this.session.createTextMessage("Hello from Hornet at: " + new Date());
+           this.mp.send(txtMsg);
            this.messageSent = true;
            this.messageSentText = txtMsg.getText();
-           s.close();
        }
        catch (JMSException e)
        {
@@ -90,13 +94,9 @@ public class TestHornetSendReceive
    {
        try
        {
-           Session s = this.conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-           MessageConsumer mc = s.createConsumer(this.testQueue);
-
-           TextMessage receivedMsg = (TextMessage) mc.receive(1000);
+           TextMessage receivedMsg = (TextMessage) this.mc.receive(1000);
            this.messageReceivedText = receivedMsg.getText();
            this.messageReceived = true;
-           s.close();
        }
        catch (JMSException e)
        {
@@ -110,6 +110,7 @@ public class TestHornetSendReceive
    {
        try
        {
+           this.session.close();
            this.conn.stop();
        }
        catch (JMSException e)

@@ -18,6 +18,17 @@ public class PersonWrapper
         this.person = person;
     }
 
+    @Override
+    public String toString()
+    {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("PersonWrapper");
+        sb.append("{person=").append(person);
+        sb.append(", selected=").append(selected);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public Person getPerson()
     {
         return person;

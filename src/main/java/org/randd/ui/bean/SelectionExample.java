@@ -4,7 +4,9 @@
 package org.randd.ui.bean;
 
 import org.jboss.seam.ScopeType;
-import org.jboss.seam.annotations.Create;
+import org.jboss.seam.annotations.AutoCreate;
+import org.jboss.seam.annotations.Begin;
+import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Name("selectionExample")
 @Scope(ScopeType.CONVERSATION)
+@AutoCreate
 public class SelectionExample
 {
     @DataModel
@@ -35,7 +38,8 @@ public class SelectionExample
         this.people = new ArrayList<PersonWrapper>();
     }
 
-    @Create
+    @Factory("people")
+    @Begin(join = true)
     public void init()
     {
         this.people.addAll(Arrays.asList(
@@ -48,12 +52,11 @@ public class SelectionExample
 
     public void selectAll(ValueChangeEvent event)
     {
-        this.log.info("Setting selected setting on all objects");
-        
         for (PersonWrapper pw : this.people)
         {
-            pw.setSelected(true);
+            pw.setSelected(this.allSelected);
         }
+
     }
 
     public void setAllSelected(boolean allSelected)
@@ -64,10 +67,5 @@ public class SelectionExample
     public boolean isAllSelected()
     {
         return allSelected;
-    }
-
-    public List<PersonWrapper> getPeople()
-    {
-        return people;
     }
 }
